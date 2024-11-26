@@ -1,34 +1,32 @@
 function met_potencia
   clc
-  A = [-10 4
-      -4 0 ];
-  x = [2
-      2];
-  tol = 0.001;
-  A = inv(A);
-  max_it = 50;
+  A = [-10, 4 ; -4, 0];
+  x = [2;2];
   error = 0;
+  tol = 0.001;
+  alpha = [0;0];
   k = 0;
-  while error < 1 - tol && (k <= max_it)
-    x_nor = x / normainfinito(x)
-    xn = A * x_nor
-    xn_nor = xn / normainfinito(xn)
-    error = abs((transpose(xn_nor) * xn_nor)/(transpose(x_nor) * x_nor))
-    alfa(1) = xn(1) / x_nor(1)
-    k = k+1
-    x = xn
+
+  while error < 1 - tol
+
+    x_norm = (1/(norm(x,inf))) * x
+
+    xk = A * x_norm
+
+    xk_norm = xk / (norm(xk,inf)); %Autovector
+
+    error = abs((transpose(xk_norm) * xk_norm)/(transpose(x_norm) * x_norm))
+
+    alpha = xk ./ x_norm;
+    x = xk;
+    k = k + 1;
   endwhile
-    n = 1 / alfa(1)
-endfunction
 
-function norma = normainfinito(vector)
+  k
+  xk_norm
+  alpha
 
-  bigger = abs(vector(1));
-  for i = 1 : length(vector)
-    if bigger < abs(vector(i))
-      bigger = abs(vector(i));
-    endif
-  endfor
-  norma = bigger;
-  return
-endfunction
+  izq = A * xk %Lado izquierdo de la ecuación
+  der = alpha(1) * xk %Lado derecho de la ecuación
+
+end
