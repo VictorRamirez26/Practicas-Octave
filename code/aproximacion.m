@@ -6,7 +6,7 @@ function aproximacion
   fiT = transpose(fi);
 
   a = (fiT * fi) \ (fiT * y)
-  funcion = a(1) * 1 + a(2) * x.+ a(3)*x.^2;
+  funcion = a(1) * 1 + a(2) * x + a(3)*x.^2;
   plot(x,y,'o' , x,funcion)
 
 endfunction
