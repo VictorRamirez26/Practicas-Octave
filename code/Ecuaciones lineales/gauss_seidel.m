@@ -1,40 +1,45 @@
 function gsuss_seidel
-  clc
-  A = [-3 1 -2
-        4 -5 0
+  clc;
+  A = [-3 1 -2;
+        4 -5 0;
         1 -3 6];
-
-  b = [-2
-        5
+  b = [-2;
+        5;
         6];
 
-  xn = [0 0 0];
-  xa = [0 0 0];
-  er = [0 0 0];
+  % Inicialización
+  n = size(A, 1);
+  xn = zeros(n, 1); % Solución actual
+  xa = zeros(n, 1); % Solución anterior
   tol = 0.001;
-  error = 100;
-  k = 0
-  max_it = 1
-  while error>tol && k < max_it
-   for i=1:3
-     s1 = 0;
-     s2 = 0;
-     for j=1:3
-       if j<i
-         s1 = s1 + A(i,j)*xn(j);
-       endif
-       if i<j
-         s2= s2 + A(i,j)*xa(j)
-       endif
-     endfor
+  max_it = 100;
+  error = inf;
+  k = 0;
 
-     xn(i) = (-s1 - s2 + b(i)) / A(i,i);
-     error = abs(xn(i)- xa(i));
-     xa(i) = xn(i);
-   endfor
+  while error > tol && k < max_it
+    for i = 1:n
+      s1 = 0; % Suma de elementos anteriores
+      s2 = 0; % Suma de elementos posteriores
 
-   k=k+1
-  endwhile
+      for j = 1:n
+        if j < i % Parte superior de la diagonal
+          s1 = s1 + A(i, j) * xn(j);
+        elseif j > i % Parte inferior de la diagonal
+          s2 = s2 + A(i, j) * xa(j);
+        end
+      endfor
 
+      xn(i) = (-s1 - s2 + b(i)) / A(i, i);
+    endfor
+
+    % Calcular error como norma
+    error = norm(xn - xa, inf);
+    xa = xn; % Actualizo para la sig iteracion
+    k = k + 1;
+  end
+  k
   xn
+  resultado_real = A \ b
+
 endfunction
+

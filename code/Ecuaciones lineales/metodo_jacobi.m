@@ -8,7 +8,7 @@ function metodo_jacobi
   B = [-10; 20; 20; -10]
 
   x = [0 0 0 0];
-  xn = [0 0 0 0];
+  x_ant = [0 0 0 0];
   max_it = 1000;
   error = 1000;
   k=0;
@@ -26,11 +26,10 @@ function metodo_jacobi
         endif
 
       x(i) = (B(i) - sum)/ A(i,i); % Aplico la formula completa
-      er(i) = abs(x(i) - xn(i));
-
+      er(i) = norm(x(i) - x_ant(i), inf);
       endfor
 
-    xn = x;
+    x_ant = x;
     error = max(er);
 
     endfor
@@ -39,7 +38,7 @@ function metodo_jacobi
   endwhile
 
   x % Aproximación
-
+  k
   resultado_real = A \ B
 
 
