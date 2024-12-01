@@ -6,8 +6,9 @@ function rungeKutta
   y = zeros(1,size);
   y(1) = 4;
   w = 1/2; % Para cambiar entre euler mejorado y modificado
+
   for i=1 : size-1
-    k1 = h * f(x(i),y(i))
+    k1 = h * f(x(i),y(i));
     xg = x(i) + (h/(2*w));
     yg = y(i) + (k1/(2*w));
     k2 = h * f(xg,yg);
