@@ -17,7 +17,7 @@ function reduccion_sistemas_edo
 
     yg = y(:,i) + k1/(2*w);
 
-    k2 = h*(f(xg(i) , yg(:,i));
+    k2 = h*(f(xg(i) , yg(:,i)));
 
     y(:,i+1) = y(:,i) + (1-w)*k1 + w*k2;
 

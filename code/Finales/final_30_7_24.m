@@ -17,6 +17,7 @@ function final_30_7_24
   tol = 10^(-6);
   resto = 2;
 
+
   while resto > tol
     for i = 1 : size
       sum = 0;

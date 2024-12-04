@@ -27,6 +27,6 @@ function metodo_potencia_inv
   xk_norm
   lambda = 1/alpha(1)
 
-  izq = A_inv * xk %Lado izquierdo de la ecuación
-  der = (1 / lambda) * xk %Lado derecho de la ecuación
+  izq = A_inv * xk_norm %Lado izquierdo de la ecuación
+  der = (1 / lambda) * xk_norm %Lado derecho de la ecuación
 end
